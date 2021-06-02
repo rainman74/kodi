@@ -2,11 +2,11 @@ include ../../Makefile.include
 DEPS = ../../Makefile.include Makefile 001-darwinembed_DiskArbitration-revert.patch tvos.patch ../../download-files.include
 
 # lib name, version
-LIBNAME=libbluray
+LIBNAME=libbluray-android
 VERSION=1.3.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
-SHA512=3d5145e6fd7de099c07f937282112c7abb12a5590b7c0b965b00bddee3837ddfd1a30076aaa6d6278d07a5beee3856f602125983ae075ab30eceb6ac1bd9bcdc
+SHA512=9179623a64d237aa16d0bbee6f4bf4379f252fd5ac6eb628200f97f1571bcc27a3e87c29f45ff40700347cfdf32c8b9fb5a94ceddbfc560ac1a7b22c14cb3b1e
 include ../../download-files.include
 
 # configuration settings
