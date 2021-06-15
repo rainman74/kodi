@@ -347,3 +347,7 @@ msgstr "Während Musik oder ein Video spielt, erscheint der Titel am oberen Bild
 msgctxt "#31904"
 msgid "Now Playing Title..."
 msgstr "Laufender Titel..."
+
+msgctxt "#31170"
+msgid "Enable \"Picture-In-Picture\"-Mode"
+msgstr "\"Bild-im-Bild\"-Modus aktivieren"
