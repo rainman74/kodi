@@ -607,3 +607,7 @@ msgstr "Für Musikvideos Poster anstelle von Vorschaulbildern zeigen"
 msgctxt "#31169"
 msgid "Artwork related settings."
 msgstr "Einstellungen für Artwork"
+
+msgctxt "#31170"
+msgid "Enable \"Picture-In-Picture\"-Mode"
+msgstr "\"Bild-im-Bild\"-Modus aktivieren"
