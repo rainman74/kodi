@@ -3,12 +3,12 @@ DEPS = ../../Makefile.include Makefile ../../download-files.include
 
 # lib name, version
 LIBNAME=libandroidjni
-VERSION=cb68ac77303d1edd95e39a6f72655cdb12f76fd2
+VERSION=81a19a92ac9041d00f5aeff2320d0037156dde30
 SOURCE=archive
 ARCHIVE=$(VERSION).tar.gz
-SHA512=070e803d8a6fed549fd9f1a92caea300fed1c6c1e3eba168b0b0cdc008e24644e9085c706715853289025e2f55f964c810c46f79fca464c71d3ffe37f7ae366e
+SHA512=87b3f0e560c9e6aa683dc12dec837bfbabc8df3ea09b88d2630f313af3ff72068f169f2d293884392b56ae43fe62b114e426aa1f6248d577ec4b2b30a1e30876
 include ../../download-files.include
-GIT_BASE_URL=https://github.com/xbmc
+GIT_BASE_URL=https://github.com/Maven85
 
 LIBDYLIB=$(PLATFORM)/$(LIBNAME)/.libs/$(LIBNAME).a
 

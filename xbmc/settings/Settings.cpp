@@ -154,6 +154,7 @@ constexpr const char* CSettings::SETTING_VIDEOPLAYER_USEPRIMEDECODER;
 constexpr const char* CSettings::SETTING_VIDEOPLAYER_USESTAGEFRIGHT;
 constexpr const char* CSettings::SETTING_VIDEOPLAYER_LIMITGUIUPDATE;
 constexpr const char* CSettings::SETTING_VIDEOPLAYER_SUPPORTMVC;
+constexpr const char* CSettings::SETTING_VIDEOPLAYER_USEPIP;
 constexpr const char* CSettings::SETTING_MYVIDEOS_SELECTACTION;
 constexpr const char* CSettings::SETTING_MYVIDEOS_USETAGS;
 constexpr const char* CSettings::SETTING_MYVIDEOS_EXTRACTFLAGS;
@@ -1014,6 +1015,7 @@ void CSettings::InitializeISettingCallbacks()
   settingSet.insert(CSettings::SETTING_SOURCE_MUSIC);
   settingSet.insert(CSettings::SETTING_SOURCE_PICTURES);
   settingSet.insert(CSettings::SETTING_VIDEOSCREEN_FAKEFULLSCREEN);
+  settingSet.insert(CSettings::SETTING_VIDEOPLAYER_USEPIP);
   GetSettingsManager()->RegisterCallback(&g_application, settingSet);
 
   settingSet.clear();
