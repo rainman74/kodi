@@ -62,7 +62,9 @@ enum {
   HEVC_NAL_EOB_NUT    = 37,
   HEVC_NAL_FD_NUT     = 38,
   HEVC_NAL_SEI_PREFIX = 39,
-  HEVC_NAL_SEI_SUFFIX = 40
+  HEVC_NAL_SEI_SUFFIX = 40,
+  HEVC_NAL_UNSPEC62   = 62, // Dolby Vision RPU
+  HEVC_NAL_UNSPEC63   = 63  // Dolby Vision EL
 };
 
 enum {
@@ -927,12 +929,12 @@ bool CBitstreamConverter::BitstreamConvert(uint8_t* pData, int iSize, uint8_t **
     if (m_sps_pps_context.first_idr && IsIDR(unit_type) && !m_sps_pps_context.idr_sps_pps_seen)
     {
       BitstreamAllocAndCopy(poutbuf, poutbuf_size,
-        m_sps_pps_context.sps_pps_data, m_sps_pps_context.size, buf, nal_size);
+        m_sps_pps_context.sps_pps_data, m_sps_pps_context.size, buf, nal_size, unit_type);
       m_sps_pps_context.first_idr = 0;
     }
     else
     {
-      BitstreamAllocAndCopy(poutbuf, poutbuf_size, NULL, 0, buf, nal_size);
+      BitstreamAllocAndCopy(poutbuf, poutbuf_size, NULL, 0, buf, nal_size, unit_type);
       if (!m_sps_pps_context.first_idr && IsSlice(unit_type))
       {
           m_sps_pps_context.first_idr = 1;
@@ -953,7 +955,7 @@ fail:
 }
 
 void CBitstreamConverter::BitstreamAllocAndCopy( uint8_t **poutbuf, int *poutbuf_size,
-    const uint8_t *sps_pps, uint32_t sps_pps_size, const uint8_t *in, uint32_t in_size)
+    const uint8_t *sps_pps, uint32_t sps_pps_size, const uint8_t *in, uint32_t in_size, uint8_t nal_type)
 {
   // based on h264_mp4toannexb_bsf.c (ffmpeg)
   // which is Copyright (c) 2007 Benoit Fouet <benoit.fouet@free.fr>
@@ -962,6 +964,11 @@ void CBitstreamConverter::BitstreamAllocAndCopy( uint8_t **poutbuf, int *poutbuf
   uint32_t offset = *poutbuf_size;
   uint8_t nal_header_size = offset ? 3 : 4;
   void *tmp;
+
+  // According to x265, this type is always encoded with four-sized header
+  // https://bitbucket.org/multicoreware/x265_git/src/4bf31dc15fb6d1f93d12ecf21fad5e695f0db5c0/source/encoder/nal.cpp#lines-100
+  if (nal_type == HEVC_NAL_UNSPEC62)
+    nal_header_size = 4;
 
   *poutbuf_size += sps_pps_size + in_size + nal_header_size;
   tmp = av_realloc(*poutbuf, *poutbuf_size);
@@ -975,6 +982,13 @@ void CBitstreamConverter::BitstreamAllocAndCopy( uint8_t **poutbuf, int *poutbuf
   if (!offset)
   {
     BS_WB32(*poutbuf + sps_pps_size, 1);
+  }
+  else if (nal_header_size == 4)
+  {
+    (*poutbuf + offset + sps_pps_size)[0] = 0;
+    (*poutbuf + offset + sps_pps_size)[1] = 0;
+    (*poutbuf + offset + sps_pps_size)[2] = 0;
+    (*poutbuf + offset + sps_pps_size)[3] = 1;
   }
   else
   {
