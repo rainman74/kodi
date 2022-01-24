@@ -109,6 +109,7 @@ res:
 	DIR=$(CMAKE_SOURCE_DIR)/tools/android/packaging/language/; for LANGUAGE_FOLDER in $$(ls -a $$DIR | grep values); do mkdir -p xbmc/res/$$LANGUAGE_FOLDER; LANGUAGE_STRINGS=$$(cat $$DIR$$LANGUAGE_FOLDER/strings.xml); sed "s|##LANGUAGE_STRINGS##|$$LANGUAGE_STRINGS|" xbmc/strings.xml > xbmc/res/$$LANGUAGE_FOLDER/strings.xml; done
 	cp xbmc/colors.xml xbmc/res/values/
 	cp xbmc/searchable.xml xbmc/res/xml/
+	cp xbmc/addon.xml xbmc/assets/
 
 libs: $(PREFIX)/lib/@APP_NAME_LC@/lib@APP_NAME_LC@.so
 	rm -rf xbmc/lib/$(CPU) xbmc/obj/local/$(CPU)
