@@ -63,6 +63,8 @@ all: apk
 
 apk: apk-clean sharedapk package
 
+aab: apk-clean sharedapk package-aab
+
 obb: apk-clean sharedobb
 
 apk-obb: apk-clean sharedobb package
@@ -139,6 +141,11 @@ package: libs python java
 	@echo "Gradle build and sign..."
 	ANDROID_HOME=$(SDKROOT) ./gradlew assemble$(BUILD_TYPE)
 	@cp xbmc/build/outputs/apk/$(BUILD_TYPE_LC)/xbmc-$(BUILD_TYPE_LC).apk $(CMAKE_SOURCE_DIR)/@APP_NAME_LC@app-$(CPU)-$(BUILD_TYPE_LC).apk
+
+package-aab: libs python java
+	@echo "Gradle build and sign..."
+	ANDROID_HOME=$(SDKROOT) ./gradlew bundle$(BUILD_TYPE)
+	@cp xbmc/build/outputs/bundle/$(BUILD_TYPE_LC)/xbmc-$(BUILD_TYPE_LC).aab $(CMAKE_SOURCE_DIR)/@APP_NAME_LC@app-$(CPU)-$(BUILD_TYPE_LC).aab
 
 $(PREFIX)/lib/xbmc/lib@APP_NAME_LC@.so: $(SRCLIBS)
 	$(MAKE) -C ../../depends/target/xbmc

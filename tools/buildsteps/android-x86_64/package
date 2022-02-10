@@ -4,6 +4,8 @@ XBMC_PLATFORM_DIR=android
 
 if [ "x$BUILD_OBB" == "xtrue" ]; then
   TARGET=apk-obb
+elif [ "x$BUILD_AAB" == "xtrue" ]; then
+  TARGET=aab
 else
   TARGET=apk
 fi
@@ -15,8 +17,12 @@ cd $WORKSPACE
 #rename for upload
 #e.x. xbmc-20130314-8c2fb31-Frodo-x86_64.apk
 UPLOAD_FILENAME="kodi-$(getBuildRevDateStr)-x86_64"
-mv kodiapp-x86_64-*.apk $UPLOAD_FILENAME.apk
 if [ -f *.obb ]
 then
   mv *.obb $UPLOAD_FILENAME.obb
+elif [ -f *.aab ]
+then
+  mv *.aab $UPLOAD_FILENAME.aab
+else
+  mv kodiapp-x86_64-*.apk $UPLOAD_FILENAME.apk
 fi

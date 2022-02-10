@@ -162,7 +162,7 @@ add_bundle_file(${SMBCLIENT_LIBRARY} ${libdir} "")
 if(CPU MATCHES i686)
   set(CPU x86)
 endif()
-foreach(target apk obb apk-unsigned apk-obb apk-obb-unsigned apk-noobb apk-clean apk-sign)
+foreach(target apk aab obb apk-unsigned apk-obb apk-obb-unsigned apk-noobb apk-clean apk-sign)
   add_custom_target(${target}
       COMMAND PATH=${NATIVEPREFIX}/bin:$ENV{PATH} ${CMAKE_MAKE_PROGRAM}
               -C ${CMAKE_BINARY_DIR}/tools/android/packaging
