@@ -169,5 +169,11 @@
            android:permission="android.permission.BIND_JOB_SERVICE" />
 
     </application>
+    
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
 </manifest><!-- END_INCLUDE(manifest) -->
