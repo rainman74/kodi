@@ -104,28 +104,28 @@ public class XBMCVideoView extends SurfaceView implements
 
   public void setSurfaceRect(final int left, final int top, final int right, final int bottom)
   {
-    Main.MainActivity.runOnUiThread(new Runnable()
-    {
-      @Override
-      public void run()
-      {
-        try
-        {
-          // Android does not allow to adjust AR and/or size of a frame on a Surface.
-          // Instead, we render fullscreen on the surface and adjust the size of the surface for AR
-          // For zoom, we adjust the margins of the layout containing the surface to achieve the desired result
-          // Note: This assume margins can be negative for positive zoom levels. This doesn't work on Philips/Sony TV's
-          RelativeLayout.LayoutParams mp = new RelativeLayout.LayoutParams(getLayoutParams());
-          mp.setMargins(left, top, mVideoLayout.getWidth() - right, mVideoLayout.getHeight() - bottom);
-          setLayoutParams(mp);
-          requestLayout();
-        }
-        catch (Exception e)
-        {
-          e.printStackTrace();
-        }
-      }
-    });
+    // Main.MainActivity.runOnUiThread(new Runnable()
+    // {
+    //   @Override
+    //   public void run()
+    //   {
+    //     try
+    //     {
+    //       // Android does not allow to adjust AR and/or size of a frame on a Surface.
+    //       // Instead, we render fullscreen on the surface and adjust the size of the surface for AR
+    //       // For zoom, we adjust the margins of the layout containing the surface to achieve the desired result
+    //       // Note: This assume margins can be negative for positive zoom levels. This doesn't work on Philips/Sony TV's
+    //       RelativeLayout.LayoutParams mp = new RelativeLayout.LayoutParams(getLayoutParams());
+    //       mp.setMargins(left, top, mVideoLayout.getWidth() - right, mVideoLayout.getHeight() - bottom);
+    //       setLayoutParams(mp);
+    //       requestLayout();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //       e.printStackTrace();
+    //     }
+    //   }
+    // });
   }
 
 
